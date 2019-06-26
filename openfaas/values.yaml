@@ -1,0 +1,19 @@
+basic_auth: true
+functionNamespace: openfaas-fn
+operator:
+  create: true
+ingress:
+  enabled: true
+  # Used to create Ingress record (should be used with exposeServices: false).
+  hosts:
+    - host: gateway.helm-notifier.com  # Replace with gateway.example.com if public-facing
+      serviceName: gateway
+      servicePort: 8080
+      path: /
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+  tls:
+    - secretName: letsencrypt
+      hosts:
+        - gateway.helm-notifier.com

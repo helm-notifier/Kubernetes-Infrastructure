@@ -1,0 +1,27 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+  - name: openfaas
+    url: https://openfaas.github.io/faas-netes/
+  - name: jetstack
+    url: https://charts.jetstack.io
+helmDefaults:
+  tillerNamespace: kube-system
+  tillerless: false
+  wait: false
+  verify: false
+releases:
+  - name: cert-manager
+    chart: jetstack/cert-manager
+    namespace: cert-manager
+  - name: cert-manager-issuers
+    namespace: cert-manager
+    chart: cert-manager/cert-manager-issuers
+  - name: nginx-ingress
+    namespace: ingress-nginx
+    chart: stable/nginx-ingress
+  - name: openfaas
+    namespace: openfaas
+    chart: openfaas/openfaas
+    values:
+      - "./openfaas/values.yaml"
