@@ -36,8 +36,8 @@ spec:
         - --email-domain=*
         - --upstream=file:///dev/null
         - --http-address=0.0.0.0:4180
-        - --cookie-domain=monitor.prezero.dev
-        - -github-org=Prezero
+        - --cookie-domain=monitor.helm-notifier.com
+        - -github-org=helm-notifier
         - -github-team=monitoring
         ports:
         - containerPort: 4180

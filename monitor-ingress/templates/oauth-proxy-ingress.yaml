@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - monitor.prezero.dev
-    secretName: letsencrypt-prod
+    - {{ .Values.ingress.host }}
+    secretName: letsencrypt
   rules:
-  - host: monitor.prezero.dev
+  - host: {{ .Values.ingress.host }}
     http:
       paths:
       - backend:

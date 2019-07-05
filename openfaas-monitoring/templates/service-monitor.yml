@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus
+  name: {{ .Values.meta.name }}
+  namespace: openfaas
+spec:
+  endpoints:
+  - targetPort: 9090
+    path: /federate
+    honorLabels: true
+    params:
+      match[]:       
+      - '{job=~".+"}'
+  selector:
+    matchLabels:
+      app: openfaas
+      component: prometheus
+      heritage: Tiller
+      release: openfaas

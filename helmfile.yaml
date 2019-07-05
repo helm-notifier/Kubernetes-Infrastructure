@@ -25,3 +25,25 @@ releases:
     chart: openfaas/openfaas
     values:
       - "./openfaas/values.yaml"
+  - name: monitor-ingress
+    namespace: monitoring
+    chart: monitor-ingress
+    verify: false
+    values:
+      - "./monitor-ingress/values.yaml"
+      - github:
+          OAUTH2_PROXY_CLIENT_ID: {{ requiredEnv "GITHUB_CLIENT_ID" }}
+          OAUTH2_PROXY_CLIENT_SECRET: {{ requiredEnv "GITHUB_CLIENT_SECRET" }}
+  - name: prometheus
+    chart: stable/prometheus-operator
+    namespace: monitoring
+    version: ~5
+    verify: false
+    values:
+      - "./prometheus-operator/values.yaml"
+  - name: openfaas-monitoring
+    namespace: openfaas
+    chart: openfaas-monitoring
+    verify: false
+    values:
+      - "./openfaas-monitoring/Values.yml"
