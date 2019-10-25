@@ -1,0 +1,12 @@
+helmDefaults:
+  tillerNamespace: kube-system
+  tillerless: false
+  wait: false
+  verify: false
+releases:
+  - name: openfaas-monitoring
+    namespace: openfaas
+    chart: ../charts/openfaas-monitoring
+    verify: false
+    values:
+      - "../charts/openfaas-monitoring/Values.yml"

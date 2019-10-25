@@ -14,36 +14,35 @@ releases:
   - name: cert-manager
     chart: jetstack/cert-manager
     namespace: cert-manager
-  - name: cert-manager-issuers
-    namespace: cert-manager
-    chart: cert-manager/cert-manager-issuers
+    version: v0.11.0
   - name: nginx-ingress
     namespace: ingress-nginx
     chart: stable/nginx-ingress
+    version: 1.24.4
+    values:
+      - "../charts/nginx-ingress/values.yaml"
   - name: openfaas
     namespace: openfaas
     chart: openfaas/openfaas
+    version: 5.2.1
     values:
-      - "./openfaas/values.yaml"
-  - name: monitor-ingress
-    namespace: monitoring
-    chart: monitor-ingress
-    verify: false
-    values:
-      - "./monitor-ingress/values.yaml"
-      - github:
-          OAUTH2_PROXY_CLIENT_ID: {{ requiredEnv "GITHUB_CLIENT_ID" }}
-          OAUTH2_PROXY_CLIENT_SECRET: {{ requiredEnv "GITHUB_CLIENT_SECRET" }}
+      - "../charts/openfaas/values.yaml"
   - name: prometheus
     chart: stable/prometheus-operator
     namespace: monitoring
-    version: ~5
+    version: 6.21.0
     verify: false
     values:
-      - "./prometheus-operator/values.yaml"
-  - name: openfaas-monitoring
-    namespace: openfaas
-    chart: openfaas-monitoring
+      - "../charts/prometheus-operator/values.yaml"
+  - name: monitor-ingress
+    namespace: monitoring
+    chart: ../charts/monitor-ingress
     verify: false
     values:
-      - "./openfaas-monitoring/Values.yml"
+      - "../charts/monitor-ingress/values.yaml"
+      - github:
+          OAUTH2_PROXY_CLIENT_ID: {{ requiredEnv "GITHUB_CLIENT_ID" }}
+          OAUTH2_PROXY_CLIENT_SECRET: {{ requiredEnv "GITHUB_CLIENT_SECRET" }}
+  - name: cert-manager-issuers
+    namespace: cert-manager
+    chart: ../charts/cert-manager-issuers
