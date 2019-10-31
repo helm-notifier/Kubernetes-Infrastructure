@@ -12,8 +12,8 @@ ingress:
       path: /
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
   tls:
-    - secretName: letsencrypt
+    - secretName: letsencrypt-prod
       hosts:
         - gateway.helm-notifier.com

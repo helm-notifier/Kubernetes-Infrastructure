@@ -30,6 +30,7 @@ releases:
   - name: prometheus
     chart: stable/prometheus-operator
     namespace: monitoring
+    
     version: 6.21.0
     verify: false
     values:

@@ -3,13 +3,13 @@ prometheus:
     enabled: true
     annotations:
         kubernetes.io/ingress.class: nginx
-        certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-prod
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
         nginx.ingress.kubernetes.io/auth-url: "https://monitor.helm-notifier.com/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: "https://monitor.helm-notifier.com/oauth2/start"
     tls:
-      - secretName: letsencrypt
+      - secretName: letsencrypt-prod
         hosts:
           - monitor.helm-notifier.com
     hosts:
@@ -29,13 +29,13 @@ alertmanager:
     enabled: true
     annotations:
         kubernetes.io/ingress.class: nginx
-        certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-prod
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
         nginx.ingress.kubernetes.io/auth-url: "https://monitor.helm-notifier.com/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: "https://monitor.helm-notifier.com/oauth2/start"
     tls:
-      - secretName: letsencrypt
+      - secretName: letsencrypt-prod
         hosts:
           - monitor.helm-notifier.com
     hosts:
@@ -56,7 +56,7 @@ grafana:
     enabled: true
     annotations:
         kubernetes.io/ingress.class: nginx
-        certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-prod
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
         nginx.ingress.kubernetes.io/auth-url: "https://monitor.helm-notifier.com/oauth2/auth"
@@ -68,7 +68,7 @@ grafana:
       - monitor.helm-notifier.com
     path: /grafana/?(.*)
     tls:
-      - secretName: letsencrypt
+      - secretName: letsencrypt-prod
         hosts:
           - monitor.helm-notifier.com
   grafana.ini:
